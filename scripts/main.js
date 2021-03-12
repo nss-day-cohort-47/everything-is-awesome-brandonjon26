@@ -36,7 +36,7 @@ const legoIdElement = document.querySelector("#legoIdElement")
 legoIdElement.addEventListener("keyup", event => {
 	if (event.key === 'Enter') {
 		const legoIdValue = (event.target.value)
-		console.log("user wants to see", legoIdValue)
+		// console.log("user wants to see", legoIdValue)
 		filterLegoIdValue(legoIdValue);
 	} 
 })
