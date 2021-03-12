@@ -21,15 +21,47 @@ navElement.addEventListener("click", (event) => {
 })
 
 navElement.addEventListener("change", (event) => {
+	const materials = document.querySelector("#material-select").value
 	if (event.target.id === "material-select") {
-		const materials = document.querySelector("#material-select").value
 		if (materials === "None") {
 			makeLegoList(useLegos())
 		} else {
-			filterLegos(materials)		
+			filterMaterials(materials)		
 		}
 	} 
 })
+
+const legoIdElement = document.querySelector("#legoIdElement")
+
+legoIdElement.addEventListener("keyup", event => {
+	if (event.key === 'Enter') {
+		const legoIdValue = (event.target.value)
+		console.log("user wants to see", legoIdValue)
+		filterLegoIdValue(legoIdValue);
+	} 
+})
+
+const filterLegoIdValue = (whatFilter) => {
+	const filterArray = useLegos().filter(singleLego => {
+		if (singleLego.LegoId === (whatFilter)) {
+			return singleLego;
+		} 
+	})
+	if (filterArray.length === 0) {
+		document.getElementById("all-legos").innerHTML = "<h3>We couldn't find your lego :(</h3>"
+	} else {
+		makeLegoList(filterArray);
+	}
+}
+
+const filterMaterials = (whatFilter) => {
+	const filterArray = useLegos().filter(singleLego => {
+		if (singleLego.Material.includes(whatFilter)) {
+			return singleLego;
+		}
+	})
+	makeLegoList(filterArray);
+}
 
 const filterLegos = (whatFilter) => {
 	const filterArray = useLegos().filter(singleLego => {
